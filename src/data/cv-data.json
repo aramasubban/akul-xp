@@ -4,60 +4,54 @@
       {
         "degree": "B.S. MECHANICAL ENGINEERING — Presidential Scholar",
         "institution": "Purdue University, West Lafayette, IN",
-        "year": "July 2023 – May 2027"
+        "year": "May 2027"
       }
     ],
     "workExperience": [
       {
-        "jobTitle": "PRODUCT DEVELOPMENT INTERN — Forward Model Quality",
-        "company": "Ford Motor Company, Dearborn, MI",
-        "year": "May 2025 – August 2025",
+        "jobTitle": "CELL MANUFACTURING EQUIPMENT DESIGN / PROCESS ENGINEERING INTERN",
+        "company": "Tesla",
+        "year": "January 2026 – August 2026",
         "responsibilities": [
-          "Facilitated a Six Sigma 3L5Y root-cause panel for a faulty fuel-injector tip; implemented supplier pre-ship containment, preventing potential field issues and enabling quick response to NHTSA recall",
-          "Improved model-based design process using MagicDraw to accelerate DFMEA development for engine systems",
-          "Mapped real-world customer usage and refined test methods, increasing in-field quality by 20%",
-          "Redesigned operator instruction sheet after multiple plant Gemba visits, boosting UAW operator efficiency",
-          "Supported accelerated fatigue testing to improve the accuracy of part-to-part robustness assessments"
+          "Improved equipment availability ~10% by building a custom accelerated-test jig to match vibration frequency of equipment to simulate long-term failure of fastening mechanism and reduce future quality equipment shutdowns",
+          "Engineered and deployed an autonomous production tool with timed actuation to correct misaligned current collectors from inconsistent supplier process, eliminating the floor's largest availability/IEE loss and scrap",
+          "Conducted RCA on cell ultrasonic welding process suffering significant yield loss; applied DOE and JMP-driven insights to implement production changes that improved downstream cell yield by ~10,000 cells/week",
+          "Designed and implemented an equipment upgrade that sharply reduced cell contamination, while simultaneously reducing maintenance downtime by 25%, helping increase cell production targets to support cybercab production",
+          "Created and deployed a protective barrier that prevented equipment failure on production equipment using production trials and rapid prototyping, leading to an availability improvement of > 2.5% and $1000 per failure",
+          "Led a fleetwide effort to standardize ultrasonic weld power and performed recalibration on each tool to reduce the occurrence of asymmetric weld strength by 20% on average, improving equipment reliability and consistency"
         ]
       },
       {
-        "jobTitle": "SENIOR BATTERY ADVISOR / MODULE PROJECT LEAD",
-        "company": "Purdue Electric Racing (PER)",
+        "jobTitle": "PRODUCT DEVELOPMENT INTERN — Forward Model",
+        "company": "Ford Motor Company, Dearborn, MI",
+        "year": "May 2025 – August 2025",
+        "responsibilities": [
+          "Facilitated a Six Sigma 3L5Y root-cause panel to resolve a faulty fuel-injector tip; implemented supplier pre-ship containment that prevented the defect from escalating to a field issue or NHTSA recall",
+          "Improved model-based design process using MagicDraw to accelerate DFMEA development for engine systems",
+          "Mapped real-world customer usage and refined test methods, increasing in-field quality by 20%",
+          "Redesigned operator instruction sheet after multiple plant Gemba visits, boosting UAW operator efficiency"
+        ]
+      },
+      {
+        "jobTitle": "EX-MODULE LEAD / SENIOR BATTERY ADVISOR",
+        "company": "Purdue Electric Racing (Formula SAE EV)",
         "year": "August 2023 – Present",
         "responsibilities": [
           "Designed a waterproof battery enclosure that achieved 100% leak-free performance during tech inspection",
           "Engineered a Simscape battery model to improve peak battery performance and increase pack efficiency",
-          "Led module redesign for space optimization, increasing energy density by 30%",
-          "Designed a thermal interface and spacer system to improve cooling, enhancing battery performance by 10%"
-        ]
-      },
-      {
-        "jobTitle": "UNDERGRADUATE RESEARCHER",
-        "company": "Autonomous Robotics & Intelligent Embedded Systems Lab — Purdue University",
-        "year": "August 2025 – January 2026",
-        "responsibilities": [
-          "Designed and integrated a multi-axis robotic testbed with closed-loop motion control in ROS 2",
-          "Ran experiments with bio-responsive materials generating electrical output under controlled conditions",
-          "Built fixtures to characterize response, and data-acquisition firmware to analyze biosignals"
-        ]
-      },
-      {
-        "jobTitle": "UNDERGRADUATE RESEARCHER",
-        "company": "Purdue AI Racing Team — VIP",
-        "year": "July 2025 – Present",
-        "responsibilities": [
-          "Implemented NRHDG optimization algorithm for multi-agent drones over dynamic maps in Python",
-          "Integrated plant models and LiDAR sensor data in Simulink for NRHDG-based track mapping",
-          "Created PID control algorithms for rapid directional changes in drone path-planning simulations"
+          "Led module redesign for space optimization, increasing energy density by 30% in the new architecture",
+          "Designed a thermal interface and spacer system to improve cooling, enhancing battery performance by 10%",
+          "Developed high-accuracy cooling plate validation test for edge cases using Arduino, helped achieve top 10 finish"
         ]
       },
       {
         "jobTitle": "CAMPUS AMBASSADOR",
         "company": "MathWorks Inc.",
-        "year": "February 2025 – Present",
+        "year": "January 2025 – January 2026",
         "responsibilities": [
-          "Directed hands-on drone path Simulink workshop, increasing student participation by 40%",
-          "Organized technical workshops, competitions, and department partnerships for Simulink adoption"
+          "Directed hands-on Simulink drone path workshop for student orgs, increasing student participation by 40%",
+          "Organized technical workshops, student competitions, and department partnerships to increase Simulink adoption",
+          "Enabled students' access to MATLAB resources by hosting demos aligned with academic and research use cases"
         ]
       },
       {
@@ -65,9 +59,19 @@
         "company": "Tredence Inc., Foster City, CA",
         "year": "May 2024 – August 2024",
         "responsibilities": [
-          "Identified sector trends using NumPy and Matplotlib in Python to inform retail decisions for clients",
-          "Devised multiple regression models to analyze supply chain data, reducing costs by 15%",
-          "Leveraged data cleaning, analysis, and visualization using SQL to drive scalable insights"
+          "Identified sector trends using NumPy and Matplotlib libraries in Python to inform retail decisions for clients",
+          "Devised multiple regression models to analyze supply chain data, reducing costs for key customers by 15%",
+          "Leveraged data cleaning, analysis, and visualization skills using SQL to drive scalable insights and strategies"
+        ]
+      },
+      {
+        "jobTitle": "FOUNDER — Personal Project",
+        "company": "The Pushcart Project",
+        "year": "January 2021 – August 2023",
+        "responsibilities": [
+          "Produced a functional electric waste-pushcart prototype in Bangalore, India, from the ground up for <$2000",
+          "Donated prototype to a local waste market to assist elderly workers operate heavy carts, promoting social impact",
+          "Advocated for and facilitated transition from internal combustion alternatives to greener e-cart solutions"
         ]
       }
     ]
