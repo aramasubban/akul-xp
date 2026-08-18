@@ -1,219 +1,110 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-import emailjs from '@emailjs/browser'
+import { ref } from 'vue'
 import Button from '../Buttons/Button.vue'
 
-const { t } = useI18n()
-const userEmail = ref('')
-const emailSubject = ref('')
-const userMessage = ref('')
-const errorMessage = ref('')
-const emailSent = ref(false)
-const isLoading = ref(false)
-const isFormComplete = ref(false)
+const EMAIL_ADDRESS = 'akul.ramasubban@gmail.com'
+const PHONE_NUMBER = '6503137267'
+const PHONE_DISPLAY = '(650) 313-7267'
+const LINKEDIN_URL = 'https://www.linkedin.com/in/akulramasubban/'
 
-// Get variables from .env
-const adminName = import.meta.env.VITE_APP_ADMIN_NAME
-const adminEmailAddress = import.meta.env.VITE_APP_ADMIN_EMAIL_ADDRESS
-const publicKey = import.meta.env.VITE_APP_PUBLIC_API_EMAILJS_KEY
-const serviceId = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID
-const templateId = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID
+const selectedMethod = ref(null) // 'email' | 'text' | 'linkedin' | null
+const copied = ref(false)
 
-const sendEmail = async () => {
-  if (!userEmail.value || !userMessage.value || !emailSubject.value) {
-    emailSent.value = false
-    errorMessage.value = t('windows.contact.error.empty')
-    return
-  }
-
-  // Check if the email is in a valid format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(userEmail.value)) {
-    emailSent.value = false
-    errorMessage.value = userEmail.value + t('windows.contact.error.email')
-    return
-  }
-
-  isLoading.value = true
-
-  try {
-    await emailjs.send(
-      serviceId,
-      templateId,
-      {
-        to_name: adminName,
-        subject: emailSubject.value,
-        message: userMessage.value,
-        reply_to: userEmail.value
-      },
-      publicKey
-    )
-
-    // Reset form and error message
-    errorMessage.value = ''
-    userEmail.value = ''
-    emailSubject.value = ''
-    userMessage.value = ''
-    emailSent.value = true
-    isLoading.value = false
-  } catch (error) {
-    console.log(error.text)
-    emailSent.value = false
-    isLoading.value = false
-    errorMessage.value = t('windows.contact.error.unknown') + adminEmailAddress
+const methods = {
+  email: {
+    icon: '/img/icons/contact/email-icon-lg.webp',
+    labelKey: 'windows.contact.email',
+    value: EMAIL_ADDRESS,
+    copyValue: EMAIL_ADDRESS
+  },
+  text: {
+    icon: '/img/icons/contact/mailto-icon.webp',
+    labelKey: 'windows.contact.text',
+    value: PHONE_DISPLAY,
+    copyValue: PHONE_NUMBER
+  },
+  linkedin: {
+    icon: '/img/icons/side-menu/linkedin-icon.webp',
+    labelKey: 'windows.contact.linkedin',
+    value: LINKEDIN_URL,
+    copyValue: LINKEDIN_URL,
+    siteUrl: LINKEDIN_URL
   }
 }
 
-// Expose variables to the template
-defineExpose({
-  userEmail,
-  userMessage,
-  emailSubject,
-  errorMessage,
-  emailSent,
-  sendEmail
-})
+const selectMethod = (method) => {
+  copied.value = false
+  selectedMethod.value = method
+}
 
-// Change cursor to wait when loading
-watch(isLoading, (newValue) => {
-  if (newValue) {
-    document.body.classList.add('cursor-wait')
-  } else {
-    document.body.classList.remove('cursor-wait')
-  }
-})
+const goBack = () => {
+  selectedMethod.value = null
+}
 
-watch([userEmail, userMessage, emailSubject], ([newUserEmail, newUserMessage, newEmailSubject]) => {
-  if (newUserEmail && newUserMessage && newEmailSubject) {
-    isFormComplete.value = true
-  } else {
-    isFormComplete.value = false
-  }
-})
+const copyValue = async () => {
+  await navigator.clipboard.writeText(methods[selectedMethod.value].copyValue)
+  copied.value = true
+  setTimeout(() => {
+    copied.value = false
+  }, 1500)
+}
 </script>
 
 <template>
-  <form class="relative right-0 h-full flex flex-col h-content-headless-toolbox">
-    <!-- Header tools -->
-    <div class="bg-window-white border-window-header-bot w-full h-12 py-1 flex items-center px-1 text-xxs gap-0.5">
-      <button
-        :disabled="isLoading || !isFormComplete"
-        @click="sendEmail"
-        :isLoading="isLoading"
-        class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools"
-      >
-        <img src="/img/icons/contact/send-icon.webp" :alt="$t('windows.contact.send')" :class="[isFormComplete ? 'w-8' : 'filter grayscale w-8']" />
-        <p>{{ $t('windows.contact.send') }}</p>
-      </button>
-      <div class="h-full w-px bg-gray-192 mx-1 md:mx-0.5" />
-      <div class="flex gap-px">
-        <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-          <img src="/img/icons/contact/cut-icon.webp" :alt="$t('windows.contact.cut')" class="w-4 filter grayscale" />
-          <p>{{ $t('windows.contact.cut') }}</p>
-        </div>
-        <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-          <img src="/img/icons/contact/copy-icon.webp" :alt="$t('windows.contact.copy')" class="w-4 filter grayscale" />
-          <p>{{ $t('windows.contact.copy') }}</p>
-        </div>
-        <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-          <img src="/img/icons/contact/paste-icon.webp" :alt="$t('windows.contact.paste')" class="w-4 filter grayscale" />
-          <p>{{ $t('windows.contact.paste') }}</p>
-        </div>
-        <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-          <img src="/img/icons/contact/undo-icon.webp" :alt="$t('windows.contact.undo')" class="w-4 filter grayscale" />
-          <p>{{ $t('windows.contact.undo') }}</p>
-        </div>
-      </div>
-      <div class="h-full w-px bg-gray-192 mx-1 md:mx-0.5" />
-      <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-        <img src="/img/icons/contact/check-icon.webp" :alt="$t('windows.contact.check')" class="w-6" />
-        <p>{{ $t('windows.contact.check') }}</p>
-      </div>
-      <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-        <img src="/img/icons/contact/spelling-icon.webp" :alt="$t('windows.contact.spelling')" class="w-5" />
-        <p>{{ $t('windows.contact.spelling') }}</p>
-      </div>
-      <div class="h-full w-px bg-gray-192 mx-1 md:mx-0.5" />
-      <div class="flex items-center rounded-sm justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-        <img src="/img/icons/contact/attach-icon.webp" :alt="$t('windows.contact.attach')" class="w-5" />
-        <p>{{ $t('windows.contact.attach') }}</p>
-      </div>
-      <div class="flex justify-center items-center rounded-sm px-1 py-1 hover:border-gray-300 hover:shadow-header-tools">
-        <div class="flex items-center justify-center cursor-pointer flex-col">
-          <img src="/img/icons/contact/priority-icon.webp" :alt="$t('windows.contact.priority')" class="w-5" />
-          <p>{{ $t('windows.contact.priority') }}</p>
-        </div>
-        <div class="block border-solid down-arrow ml-3"></div>
-      </div>
-      <div class="h-full w-px bg-gray-192 mx-1 md:mx-0.5" />
-      <div class="flex items-center justify-center px-2 py-1 cursor-pointer flex-col hover:border-gray-300 hover:shadow-header-tools">
-        <img src="/img/icons/contact/sign-icon.webp" :alt="$t('windows.contact.sign')" class="w-6" />
-        <p>{{ $t('windows.contact.sign') }}</p>
+  <div class="relative right-0 h-full flex flex-col h-content-headless-toolbox bg-white">
+    <!-- Selection view -->
+    <div v-if="!selectedMethod" class="flex flex-col items-center justify-center h-full gap-6 font-trebuchet-pixel p-4 text-center">
+      <p class="text-xs">{{ $t('windows.contact.chooseMethod') }}</p>
+      <div class="flex gap-8">
+        <button
+          type="button"
+          @click="selectMethod('email')"
+          class="flex flex-col items-center gap-2 cursor-pointer px-4 py-3 rounded-sm hover:bg-window-menu-card hover:shadow-header-tools"
+        >
+          <img :src="methods.email.icon" :alt="$t(methods.email.labelKey)" class="w-12 h-12" />
+          <p class="text-xs">{{ $t(methods.email.labelKey) }}</p>
+        </button>
+        <button
+          type="button"
+          @click="selectMethod('text')"
+          class="flex flex-col items-center gap-2 cursor-pointer px-4 py-3 rounded-sm hover:bg-window-menu-card hover:shadow-header-tools"
+        >
+          <img :src="methods.text.icon" :alt="$t(methods.text.labelKey)" class="w-12 h-12" />
+          <p class="text-xs">{{ $t(methods.text.labelKey) }}</p>
+        </button>
+        <button
+          type="button"
+          @click="selectMethod('linkedin')"
+          class="flex flex-col items-center gap-2 cursor-pointer px-4 py-3 rounded-sm hover:bg-window-menu-card hover:shadow-header-tools"
+        >
+          <img :src="methods.linkedin.icon" :alt="$t(methods.linkedin.labelKey)" class="w-12 h-12" />
+          <p class="text-xs">{{ $t(methods.linkedin.labelKey) }}</p>
+        </button>
       </div>
     </div>
-    <!-- Header content -->
-    <div class="bg-window-white border-window-header-bot w-full h-18 flex items-center flex-col p-2 text-xxs gap-2">
-      <label class="w-full flex gap-2 font-trebuchet-pixel">
-        <div class="flex gap-1 w-14 items-center cursor-default">
-          <img src="/img/icons/contact/mailto-icon.webp" :alt="$t('windows.contact.to')" class="w-4 h-4" />
-          <p class="font-trebuchet-pixel">{{ $t('windows.contact.to') }}</p>
+
+    <!-- Detail view -->
+    <div v-else class="flex flex-col items-center justify-center h-full gap-4 font-trebuchet-pixel p-4 text-center">
+      <img :src="methods[selectedMethod].icon" :alt="$t(methods[selectedMethod].labelKey)" class="w-12 h-12" />
+      <label class="w-full max-w-xs flex gap-2 items-center">
+        <div class="flex gap-1 items-center cursor-default whitespace-nowrap">
+          <p class="font-trebuchet-pixel">{{ $t(methods[selectedMethod].labelKey) }} :</p>
         </div>
         <input
           type="text"
-          class="w-full h-5 border border-input-blue p-1.5 text-xs outline-none placeholder:text-black"
-          placeholder="dramasub@purdue.edu" <!-- AKUL: contact email -->
+          class="w-full h-6 border border-input-blue p-1.5 text-xs outline-none text-center"
+          :value="methods[selectedMethod].value"
           readonly="readonly"
         />
       </label>
-      <label class="w-full flex gap-2">
-        <div class="flex gap-1 w-14 items-center cursor-default">
-          <img src="/img/icons/contact/mailto-icon.webp" :alt="$t('windows.contact.from')" class="w-4 h-4" />
-          <p class="font-trebuchet-pixel">{{ $t('windows.contact.from') }}</p>
-        </div>
-        <input
-          v-model="userEmail"
-          type="email"
-          class="w-full h-5 border border-input-blue p-1.5 text-xs outline-none font-trebuchet-pixel"
-          placeholder="jean_doe@wanadoo.com"
-        />
-      </label>
-      <label class="w-full flex gap-2">
-        <div class="flex gap-1 w-14 items-center justify-center font-trebuchet-pixel cursor-default">
-          {{ $t('windows.contact.subject') }}
-        </div>
-        <input type="text" v-model="emailSubject" class="w-full h-5 border border-input-blue p-1.5 text-xs outline-none font-trebuchet-pixel" />
-      </label>
-    </div>
-    <!-- Main content -->
-    <div class="flex flex-col w-full h-content-contact bg-white overflow-auto gap-2 font-trebuchet-pixel">
-      <div class="m-2">
-        <div class="max-w-prose">
-          <textarea
-            v-model="userMessage"
-            class="w-full h-40 border border-input-blue p-2 text-xs outline-none"
-            :placeholder="$t('windows.contact.msgPlaceholder')"
-          ></textarea>
-        </div>
-        <p class="text-xs font-trebuchet-pixel italic mb-2">
-          {{ $t('windows.contact.description') }}
-        </p>
-        <div class="flex gap-2 items-center">
-          <p class="text-xs text-green-600 font-medium" v-show="emailSent">
-            {{ $t('windows.contact.success') }}
-          </p>
-          <p class="text-xs text-red font-medium" v-show="errorMessage">{{ errorMessage }}</p>
-        </div>
+      <div class="flex items-center gap-2">
+        <Button layout="small" @submit="copyValue">{{ $t('windows.contact.copy') }}</Button>
+        <Button v-if="methods[selectedMethod].siteUrl" layout="small" :href="methods[selectedMethod].siteUrl" blank>
+          {{ $t('windows.contact.goToSite') }}
+        </Button>
+        <Button layout="small" @submit="goBack">{{ $t('windows.contact.back') }}</Button>
       </div>
+      <p class="text-xs text-green-600 font-medium" v-show="copied">{{ $t('windows.contact.copied') }}</p>
     </div>
-  </form>
+  </div>
 </template>
-
-<style scoped>
-.down-arrow {
-  content: '';
-  border-width: 3px 3px 0px;
-  border-color: rgb(0, 0, 0) transparent;
-}
-</style>
