@@ -5,6 +5,7 @@ import ProfileHeader from './ProfileHeader.vue'
 import EducationItem from './EducationItem.vue'
 import cvData from '@/data/cv-data.json'
 import WorkExperienceItem from './WorkExperienceItem.vue'
+import { pub } from '@/utils/publicAsset'
 
 const localeStore = useLocaleStore()
 const birthdate = new Date(2005, 5, 15) // AKUL: age=20 (adjust month/day if needed)
@@ -47,7 +48,7 @@ const experienceData = computed(() => {
   </div>
   <a
     rel="noopener"
-    :href="'pdf/CV_akul_ramasubban_' + localeStore.currentLocale + '.pdf'" <!-- AKUL: updated PDF filename -->
+    :href="pub('/pdf/CV_akul_ramasubban_' + localeStore.currentLocale + '.pdf')" <!-- AKUL: updated PDF filename -->
     :download="'CV_akul_ramasubban_' + localeStore.currentLocale + '.pdf'" <!-- AKUL: updated PDF filename -->
     class="absolute bottom-2 right-1 md:right-4 h-6 text-xxs border border-twilight-blue bg-button-submit rounded-sm leading-loose px-3 hover:shadow-button-submit-hover cursor-pointer active:bg-button-clicked"
   >

@@ -88,6 +88,7 @@ import DesktopAppsLayout from '@/layouts/DesktopAppsLayout.vue'
 import Window from '@/layouts/Window.vue'
 import windowsData from '@/data/windows-data.json'
 import ClippyModal from '@/components/Modals/ClippyModal.vue'
+import { pub, pubDeep } from '@/utils/publicAsset'
 
 const showHeader = ref(false)
 const windows = ref([])
@@ -101,7 +102,7 @@ onMounted(() => {
   localeStore.setLocale(storedLocale)
 
   windowsStore.loadState()
-  volumeStore.playAudio(['/sounds/start-windows.mp3'])
+  volumeStore.playAudio([pub('/sounds/start-windows.mp3')])
   volumeStore.unmuteAudio()
 })
 
@@ -138,7 +139,7 @@ const components = {
 // Create the entities array from the data.json
 const entities = ref(
   windowsData.map((item) => ({
-    ...item,
+    ...pubDeep(item),
     component: components[item.component]
   }))
 )

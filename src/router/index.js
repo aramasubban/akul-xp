@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Loader from '../views/Loader.vue'
 import Office from '../views/Office.vue'
+import { pub } from '@/utils/publicAsset'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,7 +73,7 @@ const router = createRouter({
           },
           {
             name: 'twitter:image',
-            content: '/img/logo-portfolio-black.webp' // AKUL: updated
+            content: pub('/img/logo-portfolio-black.webp') // AKUL: updated
           },
           {
             name: 'twitter:image:alt',
@@ -101,7 +102,7 @@ const router = createRouter({
           },
           {
             property: 'og:image',
-            content: '/img/logo-portfolio-black.webp' // AKUL: updated
+            content: pub('/img/logo-portfolio-black.webp') // AKUL: updated
           },
           {
             property: 'og:image:alt',
@@ -185,7 +186,7 @@ const router = createRouter({
           },
           {
             name: 'twitter:image',
-            content: '/img/logo-portfolio-black.webp' // AKUL: updated
+            content: pub('/img/logo-portfolio-black.webp') // AKUL: updated
           },
           {
             name: 'twitter:image:alt',
@@ -214,7 +215,7 @@ const router = createRouter({
           },
           {
             name: 'og:image',
-            content: '/img/logo-portfolio-black.webp' // AKUL: updated
+            content: pub('/img/logo-portfolio-black.webp') // AKUL: updated
           },
           {
             name: 'og:image:alt',

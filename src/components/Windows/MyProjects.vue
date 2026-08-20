@@ -12,6 +12,7 @@ import PangaiaContent from '@/components/Windows/MyProjects/PangaiaContent.vue'
 import FannyContent from './MyProjects/FannyContent.vue'
 import Emc2Content from './MyProjects/Emc2Content.vue'
 import AidellaContent from './MyProjects/AidellaContent.vue'
+import { pub } from '@/utils/publicAsset'
 
 const props = defineProps({
   leftMenuType: String
@@ -163,7 +164,7 @@ window.addEventListener('click', (e) => {
             class="flex items-center px-4 pb-2 gap-2.5 cursor-pointer project-card"
             :class="{ active: project.isFocus }"
           >
-            <img :src="'/img/icons/' + project.icon" alt="project" class="w-10 h-10" :style="{ opacity: project.isFocus ? 0.5 : 1 }" />
+            <img :src="pub('/img/icons/' + project.icon)" alt="project" class="w-10 h-10" :style="{ opacity: project.isFocus ? 0.5 : 1 }" />
             <p
               class="text-xs font-tahoma font-medium"
               :style="{

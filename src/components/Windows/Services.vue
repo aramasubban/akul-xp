@@ -7,7 +7,7 @@
       <div class="m-4">
         <div class="w-full gap-4 mb-4">
           <div class="flex items-center gap-3 mb-2">
-            <img :src="'/img/icons/' + goBackStore.currentActiveService.icon" alt="service icon" class="w-12 h-12" />
+            <img :src="pub('/img/icons/' + goBackStore.currentActiveService.icon)" alt="service icon" class="w-12 h-12" />
             <h2 class="text-xl md:text-2xl font-semibold">{{ getLocalizedServiceName(goBackStore.currentActiveService) }}</h2>
           </div>
           
@@ -86,7 +86,7 @@
             class="flex items-center px-4 pb-2 gap-2.5 cursor-pointer service-card"
             :class="{ active: service.isFocus }"
           >
-            <img :src="'/img/icons/' + service.icon" alt="service" class="w-10 h-10" :style="{ opacity: service.isFocus ? 0.5 : 1 }" />
+            <img :src="pub('/img/icons/' + service.icon)" alt="service" class="w-10 h-10" :style="{ opacity: service.isFocus ? 0.5 : 1 }" />
             <p
               class="text-xs font-tahoma font-medium"
               :style="{
@@ -109,6 +109,7 @@ import { useLocaleStore } from '@/stores/localeStore'
 import { useGoBackStore } from '@/stores/goBackStore'
 import servicesData from '@/data/services-data.json'
 import WindowLeftMenu from '@/components/Windows/WindowLeftMenu.vue'
+import { pub } from '@/utils/publicAsset'
 
 const props = defineProps({
   leftMenuType: String

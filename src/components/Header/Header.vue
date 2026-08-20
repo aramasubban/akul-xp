@@ -69,6 +69,7 @@ import HeaderLeftButton from '@/components/Buttons/HeaderLeftButton.vue'
 import HeaderRightButton from '@/components/Buttons/HeaderRightButton.vue'
 import HeaderShutdown from '@/components/Buttons/HeaderShutdown.vue'
 import HeaderDisconnect from '@/components/Buttons/HeaderDisconnect.vue'
+import { pub } from '@/utils/publicAsset'
 
 const emit = defineEmits()
 const volumeStore = useVolumeStore()
@@ -98,7 +99,7 @@ const toggleWindow = (buttonName) => {
 }
 
 const shutdown = () => {
-  volumeStore.playAudio(['/sounds/shutdown-windows.mp3'])
+  volumeStore.playAudio([pub('/sounds/shutdown-windows.mp3')])
   volumeStore.unmuteAudio()
 }
 

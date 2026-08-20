@@ -8,13 +8,14 @@
       </WindowDropdown>
     </div>
     <div v-if="windowsHeaderLogo" class="flex items-center h-6 w-10">
-      <img src="/img/icons/windows-header-window-icon.webp" :alt="$t('common.icon') + ' windows'" class="h-full pt-0.5 border-window-header-bot" />
+      <img :src="pub('/img/icons/windows-header-window-icon.webp')" :alt="$t('common.icon') + ' windows'" class="h-full pt-0.5 border-window-header-bot" />
     </div>
   </div>
 </template>
 
 <script setup>
 import WindowDropdown from '@/components/Buttons/WindowDropdown.vue'
+import { pub } from '@/utils/publicAsset'
 
 const props = defineProps({
   dropdownItems: {

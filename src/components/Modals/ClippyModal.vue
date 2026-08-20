@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { pub } from '@/utils/publicAsset'
 
 const { t } = useI18n()
 const isVisible = ref(false)
@@ -90,7 +91,7 @@ const dismissForever = () => {
 			</div>
 
 			<!-- Clippy image -->
-			<img src="/videos/clippy.gif" alt="Clippy" class="w-20 md:w-24 h-auto cursor-pointer" :title="t('clippy.clippyAlt')"
+			<img :src="pub('/videos/clippy.gif')" alt="Clippy" class="w-20 md:w-24 h-auto cursor-pointer" :title="t('clippy.clippyAlt')"
 				@click="closeModal" />
 		</div>
 	</Transition>

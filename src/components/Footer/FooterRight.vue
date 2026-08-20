@@ -6,6 +6,7 @@ import CurrentTime from './CurrentTime.vue'
 import NotificationModal from '@/components/Modals/NotificationModal.vue'
 import MusicVolumeModal from '@/components/Modals/MusicVolumeModal.vue'
 import LanguageModal from '@/components/Modals/LanguageModal.vue'
+import { pub } from '@/utils/publicAsset'
 
 const volumeStore = useVolumeStore()
 const volume = computed(() => volumeStore.volume)
@@ -70,7 +71,7 @@ onUnmounted(() => {
 })
 
 const volumeIconSrc = computed(() => {
-  return volume.value === 0 ? '/img/icons/mute-icon-sm.webp' : '/img/icons/volume-icon-sm.webp'
+  return pub(volume.value === 0 ? '/img/icons/mute-icon-sm.webp' : '/img/icons/volume-icon-sm.webp')
 })
 
 // Function to toggle the language modal
@@ -82,7 +83,7 @@ const toggleLanguageModal = () => {
 }
 
 const flagSrc = computed(() => {
-  return `/img/icons/langs/flag-${currentLocale.value}.webp`
+  return pub(`/img/icons/langs/flag-${currentLocale.value}.webp`)
 })
 </script>
 
@@ -97,7 +98,7 @@ const flagSrc = computed(() => {
         @click="toggleLanguageModal"
       />
     </div>
-    <img class="w-4 h-4 cursor-pointer" src="/img/icons/full-screen-icon-sm.webp" alt="Mode plein écran" :title="originalTitle" @click="enterFullScreen" />
+    <img class="w-4 h-4 cursor-pointer" :src="pub('/img/icons/full-screen-icon-sm.webp')" alt="Mode plein écran" :title="originalTitle" @click="enterFullScreen" />
     <img class="w-4 h-4 mt-px cursor-pointer" :src="volumeIconSrc" alt="Gestion du volume" title="Gestion du volume" @click.stop="toggleMusicModal" />
     <MusicVolumeModal v-if="isVolumeSettingsDisplayed" ref="musicModalRef" />
     <LanguageModal v-if="isLanguageSettingsDisplayed" :currentLocale="currentLocale" />

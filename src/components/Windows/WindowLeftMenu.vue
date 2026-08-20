@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useLocaleStore } from '@/stores/localeStore'
 import leftMenuData from '@/data/left-menu-data.json'
+import { pubDeep } from '@/utils/publicAsset'
 
 const props = defineProps({
   leftMenuType: String
@@ -10,7 +11,7 @@ const props = defineProps({
 // Get the current locale from the locale store
 const localeStore = useLocaleStore()
 const currentLocale = computed(() => localeStore.currentLocale)
-const leftMenu = leftMenuData.leftMenuItems[props.leftMenuType]
+const leftMenu = pubDeep(leftMenuData.leftMenuItems[props.leftMenuType])
 
 const getLocalizedTitle = (item) => {
   return item.title[currentLocale.value] || item.title['fr']

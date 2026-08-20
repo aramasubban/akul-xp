@@ -6,6 +6,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
+import { pub } from '@/utils/publicAsset'
 let dosbox = null
 let isRunning = ref(false)
 
@@ -14,7 +15,7 @@ onMounted(() => {
     dosbox = new Dosbox({
       id: 'dosbox',
       onload: function (dosbox) {
-        dosbox.run('/game/DOOM-@evilution.zip', './DOOM/DOOM.EXE')
+        dosbox.run(pub('/game/DOOM-@evilution.zip'), './DOOM/DOOM.EXE')
         isRunning.value = true
       },
       onrun: function (dosbox, app) {

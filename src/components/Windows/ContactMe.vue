@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Button from '../Buttons/Button.vue'
+import { pub } from '@/utils/publicAsset'
 
 const EMAIL_ADDRESS = 'akul.ramasubban@gmail.com'
 const PHONE_NUMBER = '6503137267'
@@ -12,19 +13,19 @@ const copied = ref(false)
 
 const methods = {
   email: {
-    icon: '/img/icons/contact/email-icon-lg.webp',
+    icon: pub('/img/icons/contact/email-icon-lg.webp'),
     labelKey: 'windows.contact.email',
     value: EMAIL_ADDRESS,
     copyValue: EMAIL_ADDRESS
   },
   text: {
-    icon: '/img/icons/contact/mailto-icon.webp',
+    icon: pub('/img/icons/contact/mailto-icon.webp'),
     labelKey: 'windows.contact.text',
     value: PHONE_DISPLAY,
     copyValue: PHONE_NUMBER
   },
   linkedin: {
-    icon: '/img/icons/side-menu/linkedin-icon.webp',
+    icon: pub('/img/icons/side-menu/linkedin-icon.webp'),
     labelKey: 'windows.contact.linkedin',
     value: LINKEDIN_URL,
     copyValue: LINKEDIN_URL,

@@ -42,6 +42,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { useLocaleStore } from '@/stores/localeStore'
 import { parseICS } from './icsParser'
+import { pub } from '@/utils/publicAsset'
 
 const localeStore = useLocaleStore()
 
@@ -67,7 +68,7 @@ watch(
 )
 
 async function fetchEvents() {
-  const icsFile = '/calendar/calendar-' + localeStore.currentLocale + '.ics'
+  const icsFile = pub('/calendar/calendar-' + localeStore.currentLocale + '.ics')
 
   try {
     const response = await fetch(icsFile)
